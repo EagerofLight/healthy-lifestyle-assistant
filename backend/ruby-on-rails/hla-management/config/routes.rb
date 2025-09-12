@@ -1,12 +1,26 @@
 Rails.application.routes.draw do
+  devise_for :users, # generate devise router by reference to User
+             path: '', # path set to '', deafult /users/
+             path_names: {
+              sign_in: 'login', # sign_in -> login
+              sign_out: 'logout', # sign_out -> logout
+              registration: 'signup' # sign_up -> signup
+             },
+             controllers:{ # use custom controller to replace default controllers
+              sessions: 'users/sessions', 
+              registrations: 'users/registrations'
+             }
+
+  resources :users
+  ## API
+  ## GET    /users          -> users#index
+  ##GET    /users/:id      -> users#show
+  ##POST   /users          -> users#create
+  ##PUT    /users/:id      -> users#update
+  ##PATCH  /users/:id      -> users#update
+  ##DELETE /users/:id      -> users#destroy
+
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
