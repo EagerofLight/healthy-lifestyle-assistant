@@ -30,7 +30,7 @@ Devise.setup do |config|
     jwt.expiration_time = 1.day.to_i
   end
 
-  config.navigational_formats = []
+  config.navigational_formats = [] # api only
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

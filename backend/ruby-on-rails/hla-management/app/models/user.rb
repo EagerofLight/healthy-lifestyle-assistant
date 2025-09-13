@@ -4,7 +4,7 @@ class User < ApplicationRecord # base Model
   devise :database_authenticatable, # email + pwd login
          :registerable, # register + login
          :recoverable,  # recover pwd
-         :rememberable, # remember me
+         # API Mode :rememberable, # remember me
          :validatable, # validate email & pwd
          :jwt_authenticatable, # use jwt login
          jwt_revocation_strategy: self
