@@ -10,6 +10,9 @@ PORT = 8000
 async def lifespan(app: FastAPI):
     # initialization steps
 
+    # create table if there's nothing in db
+    Base.metadata.create_all(engine, checkfirst=True)
+    
     print("Initialization completed")
 
     yield # seperate start and close
